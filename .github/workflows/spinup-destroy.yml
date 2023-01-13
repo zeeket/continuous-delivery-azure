@@ -9,10 +9,10 @@ on:
  
 env:
  IMAGE_REGISTRY_URL: ghcr.io
- AZURE_RESOURCE_GROUP: cd-with-actions
- AZURE_APP_PLAN: actions-ttt-deployment
+ AZURE_RESOURCE_GROUP: ghlearning
+ AZURE_APP_PLAN: ghlearning-app-plan
  AZURE_LOCATION: '"westeurope"'
- AZURE_WEBAPP_NAME: zeeket-ttt-app
+ AZURE_WEBAPP_NAME: zeeket-continuous-delivery-azure
  
 jobs:
  setup-up-azure-resources:
@@ -28,11 +28,6 @@ jobs:
        uses: azure/login@v1
        with:
          creds: ${{ secrets.AZURE_CREDENTIALS }}
- 
-     - name: Create Azure resource group
-       if: success()
-       run: |
-         az group create --location ${{env.AZURE_LOCATION}} --name ${{env.AZURE_RESOURCE_GROUP}} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
  
      - name: Create Azure app service plan
        if: success()
